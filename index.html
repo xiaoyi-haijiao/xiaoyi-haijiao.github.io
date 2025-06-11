@@ -318,9 +318,7 @@
         <button class="btn btn-reset" id="resetBtn">
             <i class="fas fa-redo"></i> 重置题词器
         </button>
-        <div class="counter">
-            <i class="fas fa-list-check"></i>
-            <span id="counter">已抽取: 0/4 题</span>
+       
         </div>
     </div>
 
@@ -328,10 +326,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 问题数据
             const questions = [
-                "1. 如果用三个词形容你的大学生活，会是什么？为什么是这三个词？给你即将入学的学弟学妹们送一段话！",
-                "2. 毕业之后有什么具体的打算吗？比如是准备留在恩施发展还是去其他城市闯一闯？送给自己一段话吧！",
-                "3. 给10年之后的自己留个言",
-                "4. 你会用什么方法长期保持对一件事的热情和行动力？"
+                " 如果用三个词形容你的大学生活，会是什么？为什么是这三个词？给你即将入学的学弟学妹们送一段话！",
+                " 毕业之后有什么具体的打算吗？比如是准备留在恩施发展还是去其他城市闯一闯？送给自己一段话吧！",
+                " 给10年之后的自己留个言",
+                " 你会用什么方法长期保持对一件事的热情和行动力？"
             ];
             
             const questionElement = document.getElementById('question');
@@ -345,13 +343,7 @@
             let isRolling = false;
             let rollInterval;
             
-            // 更新计数器和进度条
-            function updateCounter() {
-                const count = selectedQuestions.length;
-                counterElement.textContent = `已抽取: ${count}/4 题`;
-                progressBar.style.width = `${count * 25}%`;
-            }
-            
+           
             // 创建按钮波纹效果
             function createRipple(event) {
                 const btn = event.currentTarget;
@@ -381,10 +373,7 @@
                 isRolling = true;
                 questionElement.classList.remove('selected', 'initial');
                 
-                // 添加滚动动画
-                questionElement.classList.add('rolling');
-                startBtn.disabled = true;
-                
+          
                 // 模拟问题快速切换效果
                 let counter = 0;
                 rollInterval = setInterval(() => {
@@ -393,7 +382,7 @@
                     questionElement.textContent = availableQuestions[randomIndex];
                     
                     counter++;
-                    if (counter > 20) { // 约2秒后停止
+                    if (counter > 20) { // 约1秒后停止
                         clearInterval(rollInterval);
                         
                         // 随机选择一个问题
