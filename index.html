@@ -318,7 +318,9 @@
         <button class="btn btn-reset" id="resetBtn">
             <i class="fas fa-redo"></i> 重置题词器
         </button>
-       
+        <div class="counter">
+            <i class="fas fa-list-check"></i>
+            <span id="counter"></span>
         </div>
     </div>
 
@@ -343,7 +345,13 @@
             let isRolling = false;
             let rollInterval;
             
-           
+            // 更新计数器和进度条
+            function updateCounter() {
+                const count = selectedQuestions.length;
+                counterElement.textContent = `已抽取: ${count}/4 题`;
+                progressBar.style.width = `${count * 25}%`;
+            }
+            
             // 创建按钮波纹效果
             function createRipple(event) {
                 const btn = event.currentTarget;
@@ -373,7 +381,10 @@
                 isRolling = true;
                 questionElement.classList.remove('selected', 'initial');
                 
-          
+                // 添加滚动动画
+                questionElement.classList.add('rolling');
+                startBtn.disabled = true;
+                
                 // 模拟问题快速切换效果
                 let counter = 0;
                 rollInterval = setInterval(() => {
@@ -382,7 +393,7 @@
                     questionElement.textContent = availableQuestions[randomIndex];
                     
                     counter++;
-                    if (counter > 20) { // 约1秒后停止
+                    if (counter > 20) { // 约2秒后停止
                         clearInterval(rollInterval);
                         
                         // 随机选择一个问题
@@ -423,6 +434,7 @@
                 questionElement.textContent = "准备就绪，点击下方按钮开始抽取问题";
                 resetBtn.style.display = 'none';
                 startBtn.style.display = 'flex';
+                startBtn.disabled = false;
                 updateCounter();
             });
             
